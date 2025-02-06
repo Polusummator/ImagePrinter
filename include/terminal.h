@@ -8,12 +8,12 @@
 #define BLOCK_UP "▀"
 #define BLOCK_DOWN "▄"
 
-inline void setColor(const Color& color, const bool is_background = false) {
+inline void setColor(const ImagePrinter::Color& color, const bool is_background = false) {
     if (is_background) {
-        std::cout << "\033[48;2;" << color.r << ";" << color.g << ";" << color.b << "m";
+        std::cout << "\033[48;2;" << color.getIntR() << ";" << color.getIntG() << ";" << color.getIntB() << "m";
     }
     else {
-        std::cout << "\033[38;2;" << color.r << ";" << color.g << ";" << color.b << "m";
+        std::cout << "\033[38;2;" << color.getIntR() << ";" << color.getIntG() << ";" << color.getIntB() << "m";
     }
 }
 
@@ -21,7 +21,7 @@ inline void resetColor() {
     std::cout << "\033[0m";
 }
 
-inline void printBlock(const Color& up_color, const Color& down_color) {
+inline void printBlock(const ImagePrinter::Color& up_color, const ImagePrinter::Color& down_color) {
     setColor(up_color);
     setColor(down_color, true);
     std::cout << BLOCK_UP;
