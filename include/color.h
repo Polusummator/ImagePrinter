@@ -1,11 +1,29 @@
 #pragma once
 
 struct Color {
-    int r;
-    int g;
-    int b;
+    double r;
+    double g;
+    double b;
 
-    Color(): r(0), g(0), b(0) {}
+    Color();
 
-    Color(const int r_, const int g_, const int b_): r(r_), g(g_), b(b_) {}
+    Color(double r_, double g_, double b_);
+
+    Color operator+(const Color& rhs) const;
+    Color& operator+=(const Color& rhs);
+
+    Color operator-(const Color& rhs) const;
+    Color& operator-=(const Color& rhs);
+
+    Color operator+(double val) const;
+    Color& operator+=(double val);
+
+    Color operator-(double val) const;
+    Color& operator-=(double val);
+
+    Color operator*(double val) const;
+    Color& operator*=(double val);
+
+    Color operator/(double val) const;
+    Color& operator/=(double val);
 };
