@@ -6,9 +6,9 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
-#define BLOCK "█"
-#define BLOCK_UP "▀"
-#define BLOCK_DOWN "▄"
+inline constexpr auto BLOCK = "█";
+inline constexpr auto BLOCK_UP = "▀";
+inline constexpr auto BLOCK_DOWN = "▄";
 
 inline void setColor(const ImagePrinter::Color& color, const bool is_background = false) {
     if (is_background) {

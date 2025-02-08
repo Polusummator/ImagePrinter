@@ -6,7 +6,7 @@ namespace ImagePrinter {
 
 Color::Color() : r(0), g(0), b(0) {}
 
-Color::Color(int r_, int g_, int b_) : r(r_ / 255.0), g(g_ / 255.0), b(b_ / 255.0) {}
+Color::Color(int r_, int g_, int b_) : r(r_ / RGB_MAX), g(g_ / RGB_MAX), b(b_ / RGB_MAX) {}
 
 Color::Color(double r_, double g_, double b_): r(r_), g(g_), b(b_) {}
 
@@ -83,13 +83,13 @@ Color& Color::operator/=(double val) {
 }
 
 int Color::getIntR() const {
-    return static_cast<int>(std::min(std::max(r, 0.0), 1.0) * 255);
+    return static_cast<int>(std::clamp(r, 0.0, 1.0) * RGB_MAX);
 }
 int Color::getIntG() const {
-    return static_cast<int>(std::min(std::max(g, 0.0), 1.0) * 255);
+    return static_cast<int>(std::clamp(g, 0.0, 1.0) * RGB_MAX);
 }
 int Color::getIntB() const {
-    return static_cast<int>(std::min(std::max(b, 0.0), 1.0) * 255);
+    return static_cast<int>(std::clamp(b, 0.0, 1.0) * RGB_MAX);
 }
 
 }
