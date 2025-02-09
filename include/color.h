@@ -12,6 +12,10 @@ struct Color {
     Color();
     Color(int r_, int g_, int b_);
     Color(double r_, double g_, double b_);
+    Color(const Color& other);
+    Color(Color&& other) noexcept;
+
+    Color& operator=(Color other);
 
     Color operator+(const Color& rhs) const;
     Color& operator+=(const Color& rhs);

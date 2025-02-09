@@ -1,6 +1,7 @@
 #include "color.h"
 
 #include <algorithm>
+#include <tuple>
 
 namespace ImagePrinter {
 
@@ -9,6 +10,24 @@ Color::Color() : r(0), g(0), b(0) {}
 Color::Color(int r_, int g_, int b_) : r(r_ / RGB_MAX), g(g_ / RGB_MAX), b(b_ / RGB_MAX) {}
 
 Color::Color(double r_, double g_, double b_): r(r_), g(g_), b(b_) {}
+
+Color::Color(const Color& other) {
+    r = other.r;
+    g = other.g;
+    b = other.b;
+}
+Color::Color(Color&& other) noexcept {
+    r = other.r;
+    g = other.g;
+    b = other.b;
+}
+
+Color& Color::operator=(Color other) {
+    std::swap(r, other.r);
+    std::swap(g, other.g);
+    std::swap(b, other.b);
+    return *this;
+}
 
 Color Color::operator+(const Color& rhs) const {
     Color result;
