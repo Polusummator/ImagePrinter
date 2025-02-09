@@ -4,7 +4,8 @@ namespace ImagePrinter {
 
 inline constexpr double RGB_MAX = 255.0;
 
-struct Color {
+class Color {
+public:
     double r;
     double g;
     double b;
