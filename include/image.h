@@ -16,7 +16,7 @@ public:
 
     bool loadImage(const std::string& filename);
 
-    Color getPixel(int x, int y) const;
+    Color getPixel(size_t x, size_t y) const;
 
     size_t getWidth() const;
 

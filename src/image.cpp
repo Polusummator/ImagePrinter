@@ -21,9 +21,14 @@ bool Image::loadImage(const std::string& filename) {
     return true;
 }
 
-Color Image::getPixel(int x, int y) const {
-    Magick::ColorRGB pixel = image.pixelColor(x, y);
-    return {pixel.red(), pixel.green(), pixel.blue()};
+Color Image::getPixel(size_t x, size_t y) const {
+    Magick::Color pixel = image.pixelColor(y, x);
+    using Magick::Quantum;
+    return {static_cast<double>(pixel.redQuantum()) / QuantumRange,
+            static_cast<double>(pixel.greenQuantum()) / QuantumRange,
+            static_cast<double>(pixel.blueQuantum()) / QuantumRange,
+            1 - pixel.alpha()
+    };
 }
 
 size_t Image::getWidth() const {
