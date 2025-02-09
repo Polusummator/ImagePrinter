@@ -23,7 +23,7 @@ void Printer::print() {
                 printBlock(result_pixels[x][y], result_pixels[x + 1][y]);
             }
             else {
-                printBlock(result_pixels[x][y], Color(0, 0, 0, 1));
+                printBlock(result_pixels[x][y], {});
             }
         }
         std::cout << std::endl;
