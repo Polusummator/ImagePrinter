@@ -30,8 +30,8 @@ Color& Color::operator=(Color other) {
 }
 
 Color Color::operator+(const Color& rhs) const {
-    Color result;
-    result += *this;
+    Color result(*this);
+    result += rhs;
     return result;
 }
 Color& Color::operator+=(const Color& rhs) {
