@@ -5,27 +5,32 @@
 
 namespace ImagePrinter {
 
-Color::Color() : r(0), g(0), b(0) {}
+Color::Color() : r(0.0), g(0.0), b(0.0), a(0.0) {}
 
-Color::Color(int r_, int g_, int b_) : r(r_ / RGB_MAX), g(g_ / RGB_MAX), b(b_ / RGB_MAX) {}
+Color::Color(int r_, int g_, int b_, int a_)
+    : r(r_ / RGB_MAX), g(g_ / RGB_MAX), b(b_ / RGB_MAX), a(a_ / RGB_MAX) {}
 
-Color::Color(double r_, double g_, double b_): r(r_), g(g_), b(b_) {}
+Color::Color(double r_, double g_, double b_, double a_)
+    : r(r_), g(g_), b(b_), a(a_) {}
 
 Color::Color(const Color& other) {
     r = other.r;
     g = other.g;
     b = other.b;
+    a = other.a;
 }
 Color::Color(Color&& other) noexcept {
     r = other.r;
     g = other.g;
     b = other.b;
+    a = other.a;
 }
 
 Color& Color::operator=(Color other) {
     std::swap(r, other.r);
     std::swap(g, other.g);
     std::swap(b, other.b);
+    std::swap(a, other.a);
     return *this;
 }
 
@@ -38,6 +43,7 @@ Color& Color::operator+=(const Color& rhs) {
     r += rhs.r;
     g += rhs.g;
     b += rhs.b;
+    a += rhs.a;
     return *this;
 }
 
@@ -50,6 +56,7 @@ Color& Color::operator/=(double val) {
     r /= val;
     g /= val;
     b /= val;
+    a /= val;
     return *this;
 }
 

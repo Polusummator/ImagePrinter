@@ -9,10 +9,11 @@ public:
     double r;
     double g;
     double b;
+    double a;
 
     Color();
-    Color(int r_, int g_, int b_);
-    Color(double r_, double g_, double b_);
+    Color(int r_, int g_, int b_, int a_);
+    Color(double r_, double g_, double b_, double a_);
     Color(const Color& other);
     Color(Color&& other) noexcept;
 

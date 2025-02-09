@@ -6,17 +6,19 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
+inline constexpr auto EMPTY_BLOCK = " ";
 inline constexpr auto BLOCK = "█";
 inline constexpr auto BLOCK_UP = "▀";
 inline constexpr auto BLOCK_DOWN = "▄";
 
 inline void setColor(const ImagePrinter::Color& color, const bool is_background = false) {
     if (is_background) {
-        std::cout << "\033[48;2;" << color.getIntR() << ";" << color.getIntG() << ";" << color.getIntB() << "m";
+        std::cout << "\033[48;2;";
     }
     else {
-        std::cout << "\033[38;2;" << color.getIntR() << ";" << color.getIntG() << ";" << color.getIntB() << "m";
+        std::cout << "\033[38;2;";
     }
+    std::cout << color.getIntR() << ";" << color.getIntG() << ";" << color.getIntB() << "m";
 }
 
 inline void resetColor() {
@@ -24,9 +26,27 @@ inline void resetColor() {
 }
 
 inline void printBlock(const ImagePrinter::Color& up_color, const ImagePrinter::Color& down_color) {
-    setColor(up_color);
-    setColor(down_color, true);
-    std::cout << BLOCK_UP;
+    if (up_color.a == 0.0) {
+        resetColor();
+        if (down_color.a == 0.0) {
+            std::cout << EMPTY_BLOCK;
+        }
+        else {
+            setColor(down_color);
+            std::cout << BLOCK_DOWN;
+        }
+    }
+    else if (down_color.a == 0.0) {
+        resetColor();
+        setColor(up_color);
+        std::cout << BLOCK_UP;
+
+    }
+    else {
+        setColor(up_color);
+        setColor(down_color, true);
+        std::cout << BLOCK_UP;
+    }
     resetColor();
 }
 
