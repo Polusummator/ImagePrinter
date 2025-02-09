@@ -42,7 +42,7 @@ Color& Color::operator+=(const Color& rhs) {
 }
 
 Color Color::operator/(double val) const {
-    Color result;
+    Color result(*this);
     result /= val;
     return result;
 }
