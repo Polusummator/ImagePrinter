@@ -20,18 +20,6 @@ struct Color {
     Color operator+(const Color& rhs) const;
     Color& operator+=(const Color& rhs);
 
-    Color operator-(const Color& rhs) const;
-    Color& operator-=(const Color& rhs);
-
-    Color operator+(double val) const;
-    Color& operator+=(double val);
-
-    Color operator-(double val) const;
-    Color& operator-=(double val);
-
-    Color operator*(double val) const;
-    Color& operator*=(double val);
-
     Color operator/(double val) const;
     Color& operator/=(double val);
 

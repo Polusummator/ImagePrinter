@@ -41,54 +41,6 @@ Color& Color::operator+=(const Color& rhs) {
     return *this;
 }
 
-Color Color::operator-(const Color& rhs) const {
-    Color result;
-    result -= *this;
-    return result;
-}
-Color& Color::operator-=(const Color& rhs) {
-    r -= rhs.r;
-    g -= rhs.g;
-    b -= rhs.b;
-    return *this;
-}
-
-Color Color::operator+(double val) const {
-    Color result;
-    result += val;
-    return result;
-}
-Color& Color::operator+=(double val) {
-    r += val;
-    g += val;
-    b += val;
-    return *this;
-}
-
-Color Color::operator-(double val) const {
-    Color result;
-    result -= val;
-    return result;
-}
-Color& Color::operator-=(double val) {
-    r -= val;
-    g -= val;
-    b -= val;
-    return *this;
-}
-
-Color Color::operator*(double val) const {
-    Color result;
-    result *= val;
-    return result;
-}
-Color& Color::operator*=(double val) {
-    r *= val;
-    g *= val;
-    b *= val;
-    return *this;
-}
-
 Color Color::operator/(double val) const {
     Color result;
     result /= val;
