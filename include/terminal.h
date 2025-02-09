@@ -41,5 +41,5 @@ inline void clearScreen() {
 inline std::pair<size_t, size_t> getTerminalSize() {
     winsize ws{};
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
-    return std::make_pair(ws.ws_row, ws.ws_col);
+    return std::make_pair(ws.ws_col, ws.ws_row);
 }
