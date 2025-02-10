@@ -18,6 +18,8 @@ bool Image::loadImage(const std::string& filename) {
         std::cerr << error.what() << std::endl;
         return false;
     }
+    image.colorSpace(Magick::scRGBColorspace);
+    image.colorSpace(Magick::sRGBColorspace);
     return true;
 }
 

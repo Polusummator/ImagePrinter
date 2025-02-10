@@ -12,7 +12,7 @@ file(GLOB SRC_LIST src/*.cpp)
 # ImageMagick
 find_package(ImageMagick REQUIRED COMPONENTS Magick++)
 set(MAGICKCORE_QUANTUM_DEPTH 16)
-set(MAGICKCORE_HDRI_ENABLE OFF)
+set(MAGICKCORE_HDRI_ENABLE ON)
 
 # Main executable
 add_executable(${PROJECT_NAME} ${SRC_LIST})
