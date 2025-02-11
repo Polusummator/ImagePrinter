@@ -11,6 +11,11 @@ file(GLOB SRC_LIST src/*.cpp)
 
 # ImageMagick
 find_package(ImageMagick REQUIRED COMPONENTS Magick++)
+if(ImageMagick_VERSION_STRING VERSION_LESS "7.0.0")
+    add_compile_definitions(IMAGEMAGICK_VERSION=6)
+else()
+    add_compile_definitions(IMAGEMAGICK_VERSION=7)
+endif()
 
 # xtermcontrol
 find_program(XTERMCONTROL_EXECUTABLE xtermcontrol)
