@@ -4,12 +4,6 @@
 
 #include <string>
 
-inline constexpr auto EMPTY_BLOCK = " ";
-inline constexpr auto BLOCK = "█";
-inline constexpr auto BLOCK_UP = "▀";
-inline constexpr auto BLOCK_DOWN = "▄";
-static constexpr double BG_MAX = 65535.0;
-
 class Terminal {
 public:
     Terminal();
@@ -30,4 +24,10 @@ public:
 
 private:
     std::pair<bool, ImagePrinter::Color> parseXtermOutput(const std::string& output_);
+
+    static constexpr auto EMPTY_BLOCK = " ";
+    static constexpr auto BLOCK = "█";
+    static constexpr auto BLOCK_UP = "▀";
+    static constexpr auto BLOCK_DOWN = "▄";
+    static constexpr double BG_MAX = 65535.0;
 };
