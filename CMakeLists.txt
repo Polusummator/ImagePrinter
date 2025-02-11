@@ -11,8 +11,6 @@ file(GLOB SRC_LIST src/*.cpp)
 
 # ImageMagick
 find_package(ImageMagick REQUIRED COMPONENTS Magick++)
-set(MAGICKCORE_QUANTUM_DEPTH 16)
-set(MAGICKCORE_HDRI_ENABLE ON)
 
 # xtermcontrol
 find_program(XTERMCONTROL_EXECUTABLE xtermcontrol)
@@ -28,3 +26,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${ImageMagick_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} ${ImageMagick_LIBRARIES})
+
+# ImageMagick config
+target_compile_definitions(${PROJECT_NAME} PRIVATE MAGICKCORE_QUANTUM_DEPTH=16 MAGICKCORE_HDRI_ENABLE=0)
