@@ -6,7 +6,15 @@
 #include <sys/ioctl.h>
 #include <charconv>
 
-Terminal::Terminal() = default;
+Terminal::Terminal() {
+    if (auto [ok, color] = getTerminalBackgroundColor(); ok) {
+        alpha_support = true;
+        bg_color = color;
+    }
+    else {
+        alpha_support = false;
+    }
+}
 
 void Terminal::setColor(const ImagePrinter::Color& color, bool is_background = false) {
     if (is_background) {
@@ -40,8 +48,16 @@ void Terminal::printBlock(const ImagePrinter::Color& up_color, const ImagePrinte
 
     }
     else {
-        setColor(up_color);
-        setColor(down_color, true);
+        if (alpha_support) {
+            ImagePrinter::Color tr_up_color = up_color.rgba2rgb(bg_color);
+            ImagePrinter::Color tr_down_color = down_color.rgba2rgb(bg_color);
+            setColor(tr_up_color);
+            setColor(tr_down_color, true);
+        }
+        else {
+            setColor(up_color);
+            setColor(down_color, true);
+        }
         std::cout << BLOCK_UP;
     }
     resetColor();

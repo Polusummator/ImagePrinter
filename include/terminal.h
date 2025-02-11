@@ -20,10 +20,13 @@ public:
 
     std::pair<size_t, size_t> getTerminalSize();
 
+private:
     std::pair<bool, ImagePrinter::Color> getTerminalBackgroundColor();
 
-private:
     std::pair<bool, ImagePrinter::Color> parseXtermOutput(const std::string& output_);
+
+    bool alpha_support;
+    ImagePrinter::Color bg_color;
 
     static constexpr auto EMPTY_BLOCK = " ";
     static constexpr auto BLOCK = "█";
