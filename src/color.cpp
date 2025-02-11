@@ -70,4 +70,13 @@ int Color::getIntB() const {
     return static_cast<int>(std::clamp(b, 0.0, 1.0) * RGB_MAX);
 }
 
+Color Color::rgba2rgb(const Color& bg_color) const {
+    Color result;
+    result.r = (1 - a) * bg_color.r + a * r;
+    result.g = (1 - a) * bg_color.g + a * g;
+    result.b = (1 - a) * bg_color.b + a * b;
+    result.a = 1.0;
+    return result;
+}
+
 }

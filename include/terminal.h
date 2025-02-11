@@ -2,64 +2,35 @@
 
 #include "color.h"
 
-#include <iostream>
-#include <unistd.h>
-#include <sys/ioctl.h>
+#include <string>
 
-inline constexpr auto EMPTY_BLOCK = " ";
-inline constexpr auto BLOCK = "█";
-inline constexpr auto BLOCK_UP = "▀";
-inline constexpr auto BLOCK_DOWN = "▄";
+class Terminal {
+public:
+    Terminal();
 
-inline void setColor(const ImagePrinter::Color& color, const bool is_background = false) {
-    if (is_background) {
-        std::cout << "\033[48;2;";
-    }
-    else {
-        std::cout << "\033[38;2;";
-    }
-    std::cout << color.getIntR() << ";" << color.getIntG() << ";" << color.getIntB() << "m";
-}
+    void setColor(const ImagePrinter::Color& color, bool is_background);
 
-inline void resetColor() {
-    std::cout << "\033[0m";
-}
+    void resetColor();
 
-inline void printBlock(const ImagePrinter::Color& up_color, const ImagePrinter::Color& down_color) {
-    if (up_color.a == 0.0) {
-        resetColor();
-        if (down_color.a == 0.0) {
-            std::cout << EMPTY_BLOCK;
-        }
-        else {
-            setColor(down_color);
-            std::cout << BLOCK_DOWN;
-        }
-    }
-    else if (down_color.a == 0.0) {
-        resetColor();
-        setColor(up_color);
-        std::cout << BLOCK_UP;
+    void printBlock(const ImagePrinter::Color& up_color, const ImagePrinter::Color& down_color);
 
-    }
-    else {
-        setColor(up_color);
-        setColor(down_color, true);
-        std::cout << BLOCK_UP;
-    }
-    resetColor();
-}
+    void setCursorPosition(int row, int col);
 
-inline void setCursorPosition(const int row, const int col) {
-    std::cout << "\033[" << row << ";" << col << "H";
-}
+    void clearScreen();
 
-inline void clearScreen() {
-    std::cout << "\033[2J\033[H";
-}
+    std::pair<size_t, size_t> getTerminalSize();
 
-inline std::pair<size_t, size_t> getTerminalSize() {
-    winsize ws{};
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
-    return std::make_pair(ws.ws_col, ws.ws_row);
-}
+private:
+    std::pair<bool, ImagePrinter::Color> getTerminalBackgroundColor();
+
+    std::pair<bool, ImagePrinter::Color> parseXtermOutput(const std::string& output_);
+
+    bool alpha_support;
+    ImagePrinter::Color bg_color;
+
+    static constexpr auto EMPTY_BLOCK = " ";
+    static constexpr auto BLOCK = "█";
+    static constexpr auto BLOCK_UP = "▀";
+    static constexpr auto BLOCK_DOWN = "▄";
+    static constexpr double BG_MAX = 65535.0;
+};

@@ -12,6 +12,7 @@ public:
     void print();
 private:
     Image image;
+    Terminal term;
     size_t block_size;
     size_t cnt_blocks_width;
     size_t cnt_blocks_height;

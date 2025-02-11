@@ -1,9 +1,11 @@
 #include "printer.h"
 
+#include <iostream>
+
 namespace ImagePrinter {
 
 Printer::Printer(const Image& image) : image(image) {
-    auto [terminal_width, terminal_height] = getTerminalSize();
+    auto [terminal_width, terminal_height] = term.getTerminalSize();
     block_size = (image.getWidth() + terminal_width - 1) / terminal_width;
     cnt_blocks_width = (image.getWidth() + block_size - 1) / block_size;
     cnt_blocks_height = (image.getHeight() + block_size - 1) / block_size;
@@ -20,10 +22,10 @@ void Printer::print() {
     for (size_t x = 0; x < cnt_blocks_height; x += 2) {
         for (size_t y = 0; y < cnt_blocks_width; ++y) {
             if (x + 1 < cnt_blocks_height) {
-                printBlock(result_pixels[x][y], result_pixels[x + 1][y]);
+                term.printBlock(result_pixels[x][y], result_pixels[x + 1][y]);
             }
             else {
-                printBlock(result_pixels[x][y], {});
+                term.printBlock(result_pixels[x][y], {});
             }
         }
         std::cout << std::endl;
