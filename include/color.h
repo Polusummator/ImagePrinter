@@ -28,6 +28,8 @@ public:
     int getIntR() const;
     int getIntG() const;
     int getIntB() const;
+
+    Color rgba2rgb(const Color& bg_color) const;
 };
 
 }
