@@ -20,7 +20,7 @@ jobs:
       run: |
         git clone https://aur.archlinux.org/yay.git
         cd yay
-        makepkg -si --noconfirm
+        makepkg -si
         cd ..
         rm -rf yay
 
