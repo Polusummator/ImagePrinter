@@ -55,6 +55,7 @@ void Terminal::printBlock(const ImagePrinter::Color& up_color, const ImagePrinte
         else {
             setColor(up_color);
             setColor(down_color, true);
+            std::cout << BLOCK_UP;
         }
     }
     resetColor();
