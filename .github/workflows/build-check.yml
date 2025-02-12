@@ -1,6 +1,16 @@
 name: Build check
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - "include/**"
+      - "src/**"
+      - "CMakeLists.txt"
+  pull_request:
+    paths:
+      - "include/**"
+      - "src/**"
+      - "CMakeLists.txt"
 
 jobs:
   build-ubuntu:
