@@ -3,11 +3,13 @@ name: Build check
 on:
   push:
     paths:
+      - ".github/workflows/**"
       - "include/**"
       - "src/**"
       - "CMakeLists.txt"
   pull_request:
     paths:
+      - ".github/workflows/**"
       - "include/**"
       - "src/**"
       - "CMakeLists.txt"
