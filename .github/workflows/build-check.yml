@@ -1,0 +1,48 @@
+name: Build check
+
+on: [push, pull_request]
+
+jobs:
+  build-ubuntu:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential cmake imagemagick libmagick++-dev xtermcontrol
+
+    - name: Configure CMake
+      run: cmake .
+
+    - name: Build
+      run: make
+
+  build-arch:
+    runs-on: ubuntu-24.04
+    container:
+      image: archlinux:latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install base dependencies
+      run: |
+        pacman -Syu --noconfirm
+        pacman -S --noconfirm base-devel git sudo cmake
+
+    - name: Install ImageMagick
+      run: |
+        pacman -S --noconfirm imagemagick
+        useradd builduser -m
+        passwd -d builduser
+        printf 'builduser ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+        sudo -u builduser bash -c 'cd ~ && git clone https://aur.archlinux.org/xtermcontrol.git && cd xtermcontrol && makepkg -si --noconfirm'
+
+    - name: Configure CMake
+      run: cmake .
+
+    - name: Build
+      run: make
