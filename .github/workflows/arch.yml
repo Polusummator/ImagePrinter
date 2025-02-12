@@ -18,11 +18,10 @@ jobs:
 
     - name: Install yay
       run: |
-        git clone https://aur.archlinux.org/yay.git
-        cd yay
-        makepkg -si
-        cd ..
-        rm -rf yay
+        useradd builduser -m
+        passwd -d builduser
+        printf 'builduser ALL=(ALL) ALL\n' | tee -a /etc/sudoers
+        sudo -u builduser bash -c 'cd ~ && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -s --noconfirm'
 
     - name: Install ImageMagick
       run: |
