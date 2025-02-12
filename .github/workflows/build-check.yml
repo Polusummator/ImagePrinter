@@ -1,9 +1,26 @@
-name: Arch (ImageMagick7)
+name: Build check
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  build-ubuntu:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y build-essential cmake imagemagick libmagick++-dev xtermcontrol
+
+    - name: Configure CMake
+      run: cmake .
+
+    - name: Build
+      run: make
+
+  build-arch:
     runs-on: ubuntu-24.04
     container:
       image: archlinux:latest
