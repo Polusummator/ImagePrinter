@@ -31,34 +31,31 @@ void Terminal::resetColor() {
 }
 
 void Terminal::printBlock(const ImagePrinter::Color& up_color, const ImagePrinter::Color& down_color) {
-    if (up_color.a == 0.0) {
-        resetColor();
-        if (down_color.a == 0.0) {
-            std::cout << EMPTY_BLOCK;
-        }
-        else {
-            setColor(down_color);
-            std::cout << BLOCK_DOWN;
-        }
-    }
-    else if (down_color.a == 0.0) {
-        resetColor();
-        setColor(up_color);
+    if (alpha_support) {
+        ImagePrinter::Color tr_up_color = up_color.rgba2rgb(bg_color);
+        ImagePrinter::Color tr_down_color = down_color.rgba2rgb(bg_color);
+        setColor(tr_up_color);
+        setColor(tr_down_color, true);
         std::cout << BLOCK_UP;
-
     }
     else {
-        if (alpha_support) {
-            ImagePrinter::Color tr_up_color = up_color.rgba2rgb(bg_color);
-            ImagePrinter::Color tr_down_color = down_color.rgba2rgb(bg_color);
-            setColor(tr_up_color);
-            setColor(tr_down_color, true);
+        if (up_color.a == 0.0) {
+            if (down_color.a == 0.0) {
+                std::cout << EMPTY_BLOCK;
+            }
+            else {
+                setColor(down_color);
+                std::cout << BLOCK_DOWN;
+            }
+        }
+        else if (down_color.a == 0.0) {
+            setColor(up_color);
+            std::cout << BLOCK_UP;
         }
         else {
             setColor(up_color);
             setColor(down_color, true);
         }
-        std::cout << BLOCK_UP;
     }
     resetColor();
 }
