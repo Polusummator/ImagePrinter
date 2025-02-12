@@ -1,0 +1,36 @@
+name: Arch (ImageMagick7)
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    container:
+      image: archlinux:latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install base dependencies
+      run: |
+        pacman -Syu --noconfirm
+        pacman -S --noconfirm base-devel git sudo
+
+    - name: Install yay
+      run: |
+        git clone https://aur.archlinux.org/yay.git
+        cd yay
+        makepkg -si -noconfirm
+        cd ..
+        rm -rf yay
+
+    - name: Install ImageMagick
+      run: |
+        pacman -S --noconfirm imagemagick libmagick++-dev
+        yay -S --noconfirm xtermcontrol
+
+    - name: Configure CMake
+      run: cmake .
+
+    - name: Build
+      run: make
