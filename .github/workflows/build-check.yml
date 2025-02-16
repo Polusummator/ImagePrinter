@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y build-essential cmake imagemagick libmagick++-dev xtermcontrol
+        sudo apt install -y build-essential cmake libmagick++-dev xtermcontrol
 
     - name: Configure CMake
       run: cmake .
