@@ -79,7 +79,7 @@ std::pair<bool, ImagePrinter::Color> Terminal::getTerminalBackgroundColor() {
     std::array<char, 128> buffer{};
     std::string result;
 
-    auto pipe = popen("xtermcontrol --get-bg", "r");
+    auto pipe = popen("xtermcontrol --get-bg 2>/dev/null", "r");
     if (!pipe) {
         return std::make_pair(false, ImagePrinter::Color());
     }
