@@ -7,7 +7,7 @@ namespace ImagePrinter {
 
 class Printer {
 public:
-    explicit Printer(const Image& image);
+    explicit Printer(const Image& image, bool v_adjustment);
 
     void print();
 private:

@@ -25,12 +25,20 @@ else()
     message(WARNING "xtermcontrol not found, please install it for alpha-channel support")
 endif()
 
+# argparse
+include(FetchContent)
+FetchContent_Declare(
+    argparse
+    GIT_REPOSITORY https://github.com/p-ranav/argparse.git
+)
+FetchContent_MakeAvailable(argparse)
+
 # Main executable
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${ImageMagick_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} ${ImageMagick_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${ImageMagick_LIBRARIES} argparse)
 
 # ImageMagick config
 target_compile_definitions(${PROJECT_NAME} PRIVATE MAGICKCORE_QUANTUM_DEPTH=16 MAGICKCORE_HDRI_ENABLE=0)

@@ -4,9 +4,13 @@
 
 namespace ImagePrinter {
 
-Printer::Printer(const Image& image) : image(image) {
+Printer::Printer(const Image& image, bool v_adjustment = false) : image(image) {
     auto [terminal_width, terminal_height] = term.getTerminalSize();
     block_size = (image.getWidth() + terminal_width - 1) / terminal_width;
+    if (v_adjustment) {
+        size_t max_height = terminal_height * 2 - 1;
+        block_size = std::max(block_size, (image.getHeight() + max_height - 1) / max_height);
+    }
     cnt_blocks_width = (image.getWidth() + block_size - 1) / block_size;
     cnt_blocks_height = (image.getHeight() + block_size - 1) / block_size;
     result_pixels.resize(cnt_blocks_height, std::vector<Color>(cnt_blocks_width));
