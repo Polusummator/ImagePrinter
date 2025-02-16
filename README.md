@@ -11,7 +11,7 @@ Terminal image renderer with alpha-channel support
 <summary><b>Debian-based</b></summary>
   
 ```
-sudo apt install imagemagick libmagick++-dev xtermcontrol
+sudo apt install libmagick++-dev xtermcontrol
 ```
 </details>
 
@@ -52,5 +52,13 @@ make
 ## Usage
 
 ```
-./ImagePrinter <file>
+./ImagePrinter [--help] [--version] [--bigger] image
+
+Positional arguments:
+  image          image filename 
+
+Optional arguments:
+  -h, --help     shows help message and exits 
+  -v, --version  prints version information and exits 
+  -b, --bigger   disable vertical adjustment
 ```
