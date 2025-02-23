@@ -2,6 +2,11 @@
 
 Terminal image renderer with alpha-channel support
 
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/c6206cec-d9d3-4ddb-80ac-bdd5f53b511c" width="400" />
+  <img src="https://github.com/user-attachments/assets/2383547c-e751-45b7-87e2-07eff552f217" width="400" /> 
+</p>
+
 ## Dependencies
 
 * [ImageMagick](https://imagemagick.org/index.php) (tested with 6.9.12-98 & 7.1.1-43)
